@@ -1,5 +1,4 @@
 name: CI
-
 on:
   push:
     branches:
@@ -28,7 +27,6 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/movie-nodeapp-frontend:latest
 
-    # Only run this job if files in the backend directory have changed and the message contains 'backend'
     if: contains( github.event.head_commit.message, 'backend')
 
   build-frontend:
@@ -51,6 +49,6 @@ jobs:
         with:
           context: ./frontend
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/movie-nodeapp-frontend:latest
-    # Only run this job if files in the frontend directory have changed and the message contains 'frontend'
+          tags: ${{ secrets.DOCKER_USERNAME }}/movie-nodeapp-backend:latest
+
     if: contains( github.event.head_commit.message, 'frontend')
