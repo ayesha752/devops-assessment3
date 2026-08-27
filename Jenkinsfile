@@ -1,51 +1,18 @@
 pipeline {
     agent any
-
     stages {
-
-        stage('Checkout') {
-            steps {
-                echo 'Source code checked out successfully'
-            }
-        }
-
         stage('Build') {
             steps {
-                echo 'Building application...'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                echo 'Running tests...'
-            }
-        }
-
-        stage('Package') {
-            steps {
-                echo 'Packaging application...'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo 'Deploying application...'
+                echo 'Building...'
             }
         }
     }
-
     post {
-
         success {
-            echo "Pipeline ${BUILD_NUMBER} completed successfully!"
+            slackSend(channel: '#internees-training', color: 'good', message: "Build succeeded: ${env.JOB_NAME} #${env.BUILD_NUMBER}")
         }
-
         failure {
-            echo "Pipeline ${BUILD_NUMBER} failed!"
-        }
-
-        always {
-            echo 'Pipeline finished.'
+            slackSend(channel: '#internees-training', color: 'danger', message: "Build failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}")
         }
     }
 }
