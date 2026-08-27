@@ -18,7 +18,9 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Running tests...'
+
             }
+
         }
 
     }
@@ -36,4 +38,5 @@ pipeline {
             echo 'Pipeline finished.'
         }
     }
+    echo 'Testing automatic polling'
 }
