@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    triggers {
+        pollSCM('H/5 * * * *')
+    }
+
     stages {
 
         stage('Checkout') {
@@ -11,18 +15,15 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo 'Building application...'
+                echo 'Building application...')
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Running tests...'
-
             }
-
         }
-
     }
 
     post {
@@ -38,5 +39,4 @@ pipeline {
             echo 'Pipeline finished.'
         }
     }
-    echo 'Testing automatic polling'
 }
