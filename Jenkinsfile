@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    triggers {
-        pollSCM('H/5 * * * *')
-    }
-
     stages {
 
         stage('Checkout') {
@@ -24,15 +20,28 @@ pipeline {
                 echo 'Running tests...'
             }
         }
+
+        stage('Package') {
+            steps {
+                echo 'Packaging application...'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying application...'
+            }
+        }
     }
 
     post {
+
         success {
-            echo 'Pipeline completed successfully!'
+            echo "Pipeline ${BUILD_NUMBER} completed successfully!"
         }
 
         failure {
-            echo 'Pipeline failed!'
+            echo "Pipeline ${BUILD_NUMBER} failed!"
         }
 
         always {
